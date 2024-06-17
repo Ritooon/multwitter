@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Multwitter</title>
+		<link rel="stylesheet" href="assets/css/multwitter.css">
+		<!-- <link rel="icon" href="./favicon.ico" type="image/x-icon"> -->
+	</head>
+	<body>
+		<nav>
+			<button class="btn" id="confBtn" state="closed">Show configuration</button>
+			<button class="btn" id="reload" onclick="location.reload()"> ⟳ Reload</button>
+		</nav>
+
+		<div id="feedConfsContainer">
+			<button class="btn" onclick="switchTheme();">Switch theme</button>
+			<div id="feedsConf">
+				<button class="btn" id="addFeed"> + Add</button>
+			</div>
+		</div>
+		<div id="feedsContainer"></div>
+
+		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<script src="assets/js/multwitter.js"></script>
+	</body>
+</html>
