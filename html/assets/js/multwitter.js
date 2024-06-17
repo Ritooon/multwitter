@@ -17,8 +17,8 @@ confBtn.addEventListener('click', function() {
 
 // Switch theme configuration 
 function switchTheme() {
-    let theme = sessionStorage.getItem('theme');
-    sessionStorage.setItem('theme', (theme == 'light' || theme == null) ? 'dark' : 'light');
+    let theme = localStorage.getItem('theme');
+    localStorage.setItem('theme', (theme == 'light' || theme == null) ? 'dark' : 'light');
     location.reload();
 }
 
@@ -28,13 +28,13 @@ function switchTheme() {
 
 // Loading feeds configuration + feeds display
 document.addEventListener("DOMContentLoaded", function() {
-    Object.keys(sessionStorage).sort().forEach((feedID, index) => {
+    Object.keys(localStorage).sort().forEach((feedID, index) => {
         if(feedID.indexOf('feed-') > -1) {
-            addFeedInput(feedID, sessionStorage.getItem(feedID)); 
+            addFeedInput(feedID, localStorage.getItem(feedID)); 
         }
     });
 
-    let theme = sessionStorage.getItem('theme');
+    let theme = localStorage.getItem('theme');
     if(theme == 'light' || theme == null) { theme = 'light'; } else { theme = 'dark'; }
     document.documentElement.setAttribute('class', theme);
 
@@ -48,7 +48,7 @@ function displayFeeds() {
     // clean html
     feedsContainer.innerHTML = '';
 
-    Object.keys(sessionStorage).sort().forEach((feedID, index) => {
+    Object.keys(localStorage).sort().forEach((feedID, index) => {
 
         if(feedID.indexOf('feed-') > -1) {
             // Create the container for the feed content
@@ -58,10 +58,10 @@ function displayFeeds() {
             // Create the feed content link
             let feedContent = document.createElement('a'); 
             feedContent.setAttribute('class', 'twitter-timeline');
-            feedContent.setAttribute('href', sessionStorage.getItem(feedID)+'?ref_src=twsrc%5Etfw');
+            feedContent.setAttribute('href', localStorage.getItem(feedID)+'?ref_src=twsrc%5Etfw');
             feedContent.textContent ='Loading feed ...';
             // If theme is set 
-            let theme = sessionStorage.getItem('theme');
+            let theme = localStorage.getItem('theme');
             if(typeof theme != 'undefined' && theme != null) {
                 feedContent.setAttribute('data-theme', theme);
             }            
@@ -121,19 +121,19 @@ function addFeedInput(id, feedVal = '') {
 /********Saving feeds*******/
 /***************************/
 
-// Save the feed in sessionStorage
+// Save the feed in localStorage
 function saveFeed(id) {
-    sessionStorage.setItem(id, document.getElementById(id).value);
+    localStorage.setItem(id, document.getElementById(id).value);
 }
 
 /***************************/ 
 /******Removing feeds*******/
 /***************************/
 
-// Remove feed from sessionStorage and DOM
+// Remove feed from localStorage and DOM
 function removeFeed(id) {
-    if (window.confirm('Are you sure you want to remove this feed source? ('+sessionStorage.getItem(id)+')')) {
-        sessionStorage.removeItem(id);
+    if (window.confirm('Are you sure you want to remove this feed source? ('+localStorage.getItem(id)+')')) {
+        localStorage.removeItem(id);
         document.getElementById(id).parentElement.remove();
     }    
 }
